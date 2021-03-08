@@ -13,6 +13,7 @@ import banner2 from '../../../assets/images/banner2.png'
 import cat1 from '../../../assets/images/cat1.png'
 import cat2 from '../../../assets/images/cat2.png'
 import cat3 from '../../../assets/images/cat3.jpeg'
+import Post from '../../components/Feed';
 export default class Home extends React.Component {
     constructor() {
         super();
@@ -38,7 +39,7 @@ export default class Home extends React.Component {
 
         // Stop here if the user did not grant permissions
         if (status !== 'granted') {
-            Alert.alert("Notifications","notifications are turned off")
+            Alert.alert("Notifications", "notifications are turned off")
             return;
         }
 
@@ -61,9 +62,9 @@ export default class Home extends React.Component {
         this.setState({ categories: resss })
         this.setState({ loading: false, network: true })
         await this.registerForPushNotificationsAsync();
-        setTimeout(()=>{
-            this.setState({active: true})
-        },5000)
+        setTimeout(() => {
+            this.setState({ active: true })
+        }, 5000)
     }
 
     render() {
@@ -117,8 +118,9 @@ export default class Home extends React.Component {
                                 </View>
                             </ScrollView>
                         </View>
-
                         {/* banner end */}
+
+
                     </View>
                 </ScrollView>
             )
@@ -199,6 +201,8 @@ export default class Home extends React.Component {
 
                         {/* banner end */}
                     </View>}
+                    {/* post starts */}
+                    <Post navigation={this.props.navigation}/>
                 </ScrollView>
 
             )

@@ -9,13 +9,14 @@ import { createStore } from 'redux';
 import productReducer from './src/store/reducer';
 import AppLoading from 'expo-app-loading';
 import {decode, encode} from 'base-64'
+import { LogBox } from 'react-native';
 
 if (!global.btoa) {  global.btoa = encode }
 
 if (!global.atob) { global.atob = decode }
 
 const store = createStore(productReducer);
-
+LogBox.ignoreLogs(['Animated: `useNativeDriver`']);
 
 export default class App extends React.Component {
   constructor(props) {

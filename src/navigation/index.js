@@ -29,6 +29,7 @@ import ProductDetailsAdmin from '../screens/ProductDetailsAdmin/index'
 import EditProfile from '../screens/Edit/EditProfile'
 import Terms from '../screens/Terms/index'
 import Loading from '../screens/Loading/index'
+import Comments from '../screens/Comments/index';
 import Disabled from '../screens/Disabled/index'
 import Search from '../screens/Search/index'
 import HeaderSearch from './Search'
@@ -221,6 +222,9 @@ const MainStack = createStackNavigator({
     navigationOptions: { 
       header: null
     }
+  },
+  Comments: {
+    screen:Comments
   }
 }, {
   defaultNavigationOptions: {
