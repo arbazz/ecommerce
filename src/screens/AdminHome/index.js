@@ -1,10 +1,11 @@
 import React from 'react';
-import { ScrollView, View, Text, TouchableOpacity, SafeAreaView, Alert, AsyncStorage } from 'react-native'
+import { ScrollView, View, Text, TouchableOpacity, SafeAreaView, Alert } from 'react-native'
 import Styles from './style'
 import { MaterialIcons } from '@expo/vector-icons';
 import { getOrdersAdmin, getDataForAdminProduct } from '../../config/firebase/Database/GetData'
 import AccountListImage from '../../components/AccountList/AccountListImage'
 import { NavigationEvents } from "react-navigation";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default class AdminHome extends React.Component {
   constructor() {

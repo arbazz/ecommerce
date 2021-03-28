@@ -1,7 +1,8 @@
 import React from 'react';
-import { AsyncStorage, View, TouchableOpacity, Image, Dimensions } from 'react-native'
+import {  View, TouchableOpacity, Image, Dimensions } from 'react-native'
 import { Container, Button, Content, Card, CardItem, Body, Text } from 'native-base';
 import SignOut from '../../config/firebase/Auth/SignOut'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default class Disabled extends React.Component {
     constructor(props) {

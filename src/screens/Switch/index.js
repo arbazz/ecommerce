@@ -1,8 +1,9 @@
 import React from 'react';
-import { AsyncStorage, View, TouchableOpacity, Image, Alert } from 'react-native'
+import {  View, TouchableOpacity, Image, Alert } from 'react-native'
 import { Container, Header, Content, Card, CardItem, Body, Text } from 'native-base';
 import { NavigationEvents } from "react-navigation";
 import { checkAuth } from '../../config/firebase/Auth/signUpAuth'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default class Switch extends React.Component {
     constructor(props) {

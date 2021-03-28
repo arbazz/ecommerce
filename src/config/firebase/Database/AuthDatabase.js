@@ -1,6 +1,6 @@
 import firebase from '../index';
 import React from 'react';
-import { AsyncStorage } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { YellowBox } from 'react-native';
 import _ from 'lodash';
 

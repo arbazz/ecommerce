@@ -31,6 +31,29 @@ const getDataForTopBanner = async (uid) => {
 
 }
 
+const getdataforPost = async (lim) => {
+  let docId;
+  let docData
+  let abc = [];
+  let docl = '';
+  await db.collection("posts")
+  .orderBy("timeStamp")
+  .startAfter(lim || 0)
+  .limit(3)
+  .get().then(function (querySnapshot) {
+    querySnapshot.forEach(function (doc) {
+      // doc.data() is never undefined for query doc snapshots
+      docId = doc.id;
+      docData = doc.data();
+      abc.push({ docId, docData });
+      docl = doc;
+    });
+  });
+  // console.log('abc===========>', abc)
+  return {abc, docl}
+
+}
+
 
 const getDataForDiscounts = async (uid) => {
   let docId;
@@ -96,6 +119,25 @@ const getDataForProductsAll = async (coll, cat) => {
   let abc = [];
   // console.log(uid)
   await db.collection(coll).where("category", "==", cat).get().then(function (querySnapshot) {
+    querySnapshot.forEach(function (doc) {
+      // doc.data() is never undefined for query doc snapshots
+      docId = doc.id;
+      docData = doc.data();
+      abc.push({ docId, docData });
+    });
+  });
+  // console.log('abc===========>', abc)
+  return abc
+
+}
+
+
+const getDataComments = async (coll) => {
+  let docId;
+  let docData
+  let abc = [];
+  // console.log(uid)
+  await db.collection('comments').where("docId", "==", coll).get().then(function (querySnapshot) {
     querySnapshot.forEach(function (doc) {
       // doc.data() is never undefined for query doc snapshots
       docId = doc.id;
@@ -247,5 +289,7 @@ export {
   geteDataForAdminProfileField,
   getOrdersAdmin,
   getDataForAdminProduct,
-  getShipingCost
+  getShipingCost,
+  getdataforPost,
+  getDataComments
 }

@@ -5,14 +5,14 @@ import {
     Text,
     TouchableOpacity,
     ActivityIndicator,
-    Image,
-    AsyncStorage
+    Image
 } from 'react-native'
 import Styles from './style'
 import { NavigationEvents } from "react-navigation";
 import { MaterialIcons } from '@expo/vector-icons';
 import { getDataAll } from '../../config/firebase/Database/GetData'
 import * as Permissions from 'expo-permissions';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default class AddProduct extends React.Component {
     constructor() {

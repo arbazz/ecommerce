@@ -1,5 +1,5 @@
 import React from 'react';
-import { AsyncStorage, View, TouchableOpacity, Image, ImageBackground } from 'react-native'
+import {  View, TouchableOpacity, Image, ImageBackground } from 'react-native'
 import { Container, Header, Content, Card, CardItem, Text } from 'native-base';
 import { NavigationEvents } from "react-navigation";
 import { checkAuth } from '../../config/firebase/Auth/signUpAuth'
@@ -9,6 +9,7 @@ import NetInfo from "@react-native-community/netinfo";
 import * as Updates from 'expo-updates'
 import { Button } from 'react-native-elements';
 import Constants from 'expo-constants';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default class Loading extends React.Component {
     constructor(props) {

@@ -7,8 +7,7 @@ import {
     SafeAreaView,
     Alert,
     KeyboardAvoidingView,
-    Image,
-    AsyncStorage,
+    Image
 } from 'react-native'
 import Styles from './style'
 import { checkAuth } from '../../config/firebase/Auth/signUpAuth'
@@ -16,6 +15,7 @@ import { Input } from 'react-native-elements'
 import { Header } from 'react-navigation-stack';
 import { Button } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default class AddProductDetails extends React.Component {
     constructor() {

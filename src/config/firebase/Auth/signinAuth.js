@@ -7,6 +7,7 @@ const signInAuth = async(email, password)=>{
                // Handle Errors here.
                var errorCode = error.code;
                response(errorCode);
+               console.log(error)
                var errorMessage = error.message;
                // ...
              }).then(()=>{

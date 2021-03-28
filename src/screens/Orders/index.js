@@ -1,9 +1,10 @@
 import React from 'react';
-import { AsyncStorage, View, TouchableOpacity, ActivityIndicator, Alert } from 'react-native'
+import {  View, TouchableOpacity, ActivityIndicator, Alert } from 'react-native'
 import { Container, Header, Content, Card, CardItem, Body, Text } from 'native-base';
 import { getOrders, getDataForAdminProduct } from '../../config/firebase/Database/GetData';
 import { NavigationEvents } from "react-navigation";
 import AccountListImage from '../../components/AccountList/AccountListImage'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default class Orders extends React.Component {
   constructor() {

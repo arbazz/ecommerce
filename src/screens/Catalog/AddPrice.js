@@ -8,7 +8,7 @@ import {
     Alert,
     KeyboardAvoidingView,
     Image,
-    AsyncStorage,
+    
 } from 'react-native'
 import Styles from './style'
 import * as Permissions from 'expo-permissions';
@@ -17,6 +17,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import { Input } from 'react-native-elements'
 import { saveProduct } from '../../config/firebase/Database/SaveData'
 import uploadImage from '../../config/firebase/Database/Image.js'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default class AddPrice extends React.Component {
     constructor() {

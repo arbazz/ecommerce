@@ -4,7 +4,7 @@ import HomeBanner from '../../components/HomeBanner/HomeBanner'
 import Styles from './style'
 import CustomCrousel from '../../components/crousel/crousel'
 import SquareHorizontalSwipe from '../../components/SquareHorizontalSwipe/SquareHorizontalSwipe'
-import { getDataForTopBanner, getDataForDiscounts, getDataAll } from '../../config/firebase/Database/GetData'
+import { getDataForTopBanner, getDataForDiscounts, getDataAll, getdataforPost } from '../../config/firebase/Database/GetData'
 import { HomeBannerHeight } from '../../config/themeColors'
 import * as Permissions from 'expo-permissions';
 import { savePushToken } from '../../config/firebase/Database/SaveData'
@@ -14,6 +14,7 @@ import cat1 from '../../../assets/images/cat1.png'
 import cat2 from '../../../assets/images/cat2.png'
 import cat3 from '../../../assets/images/cat3.jpeg'
 import Post from '../../components/Feed';
+import { FlatList } from 'react-native-gesture-handler';
 export default class Home extends React.Component {
     constructor() {
         super();
@@ -25,7 +26,10 @@ export default class Home extends React.Component {
             loading: false,
             networl: false,
             tempCat: [cat1, cat2, cat3],
-            active: false
+            active: false,
+            posts: [],
+            latestPostDoc: '',
+            hastoLoadMore: false
         }
     }
 
@@ -60,16 +64,33 @@ export default class Home extends React.Component {
         this.setState({ discounts: ress });
         const resss = await getDataAll("categories");
         this.setState({ categories: resss })
-        this.setState({ loading: false, network: true })
+        const ressss = await getdataforPost();
+        // console.log("=> => => ", ressss)
+        let postsdata = ressss.abc;
+        postsdata?.length && this.setState({ latestPostDoc: ressss.docl})
+        this.setState({ loading: false, network: true, posts: postsdata, hastoLoadMore: true })
         await this.registerForPushNotificationsAsync();
         setTimeout(() => {
             this.setState({ active: true })
         }, 5000)
-    }
+    };
 
+    getMore = async() => {
+        const ressss = await getdataforPost(this.state.latestPostDoc);
+        ressss.abc?.length && this.setState({ 
+            latestPostDoc:ressss.docl,
+            posts:[...this.state.posts, ...ressss.abc],
+          
+         });
+
+         !ressss.abc.length && this.setState({hastoLoadMore: false})
+        // console.log("=> => => new ", ressss);
+    }
+    
     render() {
-        const { categories, topBanner, discounts, loading, network, tempCat, active } = this.state
-        console.log(topBanner)
+        // console.log(this.state.posts)
+        const { hastoLoadMore, posts, categories, topBanner, discounts, loading, network, tempCat, active } = this.state
+        // console.log(topBanner)
         // making double componenet because ther is problem with apple so rendering the banner and 
         // etc for the issue of apple it is assummption althoug;
         if (!network) {
@@ -202,7 +223,34 @@ export default class Home extends React.Component {
                         {/* banner end */}
                     </View>}
                     {/* post starts */}
-                    <Post navigation={this.props.navigation}/>
+                    <FlatList
+                        data={posts}
+                        onEndReachedThreshold={0.1}
+                        onEndReached={hastoLoadMore && this.getMore}
+                        renderItem={({ item }) => {
+                            // console.log("=--=-=-=-=-", item)
+                            return (
+                                <Post
+                                docId={item.docId}
+                                users={item?.docData.users}
+                                likes={item?.docData.likes}
+                                    url={item?.docData?.file[0]}
+                                    isImage={item?.docData?.type == "image" ? true : false}
+                                    detail={item?.docData?.text}
+                                    navigation={this.props.navigation} item={item} />
+                            )
+                        }
+                        }
+                        keyExtractor={item => item.id}
+                        ListFooterComponent={() => {
+                            return (
+                                <View>
+                                    <View style={{ height: 100 }} />
+                                </View>
+                            )
+                        }}
+                    />
+
                 </ScrollView>
 
             )

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
     View,
     Text,
@@ -8,36 +8,84 @@ import {
 import { Video, AVPlaybackStatus } from 'expo-av';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { addLike } from '../../config/firebase/Database/SaveData';
 
-export default function Post({ isImage, detail, mediaType, url, profile, type, navigation }) {
+export default function Post({
+    isImage,
+    detail,
+    mediaType,
+    url,
+    profile,
+    type,
+    navigation,
+    likes,
+    docId,
+    users
+}) {
+
+    const [isLiked, setIsLiked] = useState(false);
+    const [amLiked, setAmLiked] = useState(0);
+
+    useEffect(() => {
+        initiateLike();
+    }, []);
+
+    const initiateLike = async () => {
+        const uid = await AsyncStorage.getItem("uid");
+        // console.log(users);
+        if(users.length){
+            users.forEach(element => {
+                if(uid === element){
+                    setIsLiked(true);
+                    setAmLiked(likes)
+                }
+            });
+        }
+    };
+
+    const handleLike = async() => {
+        if (isLiked) {
+            setIsLiked(false);
+            setAmLiked(amLiked - 1)
+        } else {
+            const uid = await AsyncStorage.getItem("uid");
+            if (docId) {
+                setIsLiked(true);
+                setAmLiked(likes + 1);
+                addLike(uid, docId)
+            }
+        }
+    }
 
     return (
         <View style={styles.cotniaenr}>
             <View style={styles.header}>
-                <Image source={{ uri: profile  }} style={styles.image} />
+                <Image source={require('../../../assets/images/mainLogo.png')} style={styles.image} />
                 <View>
-                    <Text style={styles.postacc}>post</Text>
+                    <Text style={styles.postacc}>    {detail}</Text>
                     {/* <Text style={styles.m}>49 m</Text> */}
                 </View>
             </View>
             <View>
-                <Text style={styles.des}>
-                    {detail}
-                </Text>
-
-               {!!type === "video" ?
-                <Video source={{ uri: url }}   // Can be a URL or a local file.
-                    style={styles.image1}
-                    resizeMode='cover'
-                    borderRadius={10}
-                />:
-                <Image style={styles.image1}
-                borderRadius={10}
-                source={{ uri: url }} />
+                {!!type === "video" ?
+                    <Video source={{ uri: url }}   // Can be a URL or a local file.
+                        style={styles.image1}
+                        resizeMode='cover'
+                        borderRadius={10}
+                    /> :
+                    <Image style={styles.image1}
+                        borderRadius={10}
+                        source={{ uri: url }} />
                 }
                 <View style={styles.bottom}>
-                    <AntDesign name="like2" style={styles.icon}/>
-                    <FontAwesome name="comment-o" style={styles.icon} onPress={()=>navigation.navigate("Comments")}/>
+                    <View style={styles.row}>
+                        <AntDesign name="like2"
+                            style={[styles.icon, isLiked && { color: 'blue' }]}
+                            onPress={() => handleLike(docId)} />
+                        <Text style={styles.like}>{amLiked ? amLiked : likes}</Text>
+                    </View>
+                    <FontAwesome name="comment-o" style={styles.icon} onPress={() => navigation.navigate("Comments", {docId})} />
                 </View>
             </View>
         </View>
@@ -48,7 +96,10 @@ const styles = StyleSheet.create({
     cotniaenr: {
         backgroundColor: 'white',
         padding: 10,
-        elevation: 10
+        elevation: 10,
+        width: '95%',
+        alignSelf: 'center',
+        marginTop: 20
     },
     image: {
         borderRadius: 4,
@@ -62,7 +113,7 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     postacc: {
-        marginLeft: 10,
+        marginLeft: 1,
         fontSize: 20,
         fontWeight: 'bold',
     },
@@ -76,7 +127,7 @@ const styles = StyleSheet.create({
     },
     image1: {
         width: '100%',
-        height: 250,
+        height: 300,
         marginTop: 10,
         backgroundColor: 'grey'
     },
@@ -89,5 +140,15 @@ const styles = StyleSheet.create({
     },
     icon: {
         fontSize: 30,
+        color: 'black'
+    },
+    row: {
+        flexDirection: 'row',
+        alignItems: 'center'
+    },
+    like: {
+        marginLeft: 10,
+        fontSize: 22,
+        marginTop: 2
     }
 })

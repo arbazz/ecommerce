@@ -1,6 +1,7 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, SafeAreaView, StatusBar, AsyncStorage } from 'react-native'
+import { View, Text, TouchableOpacity, SafeAreaView, StatusBar } from 'react-native'
 import { header } from '../config/themeColors'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import Styles from './style'
 import { withNavigation } from 'react-navigation';
 import Icon from 'react-native-vector-icons/FontAwesome';

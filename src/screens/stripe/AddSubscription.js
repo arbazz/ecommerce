@@ -1,10 +1,11 @@
 import React from 'react';
-import { AsyncStorage,ActivityIndicator } from 'react-native'
+import { ActivityIndicator } from 'react-native'
 import AddSubscriptionView from './AddSubscriptionView';
 import { saveOrderInfo } from '../../config/firebase/Database/SaveData'
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { deleteProduct } from '../../store/action'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const STRIPE_ERROR = 'Payment service error. Try again later.';
 const SERVER_ERROR = 'Server error. Try again later.';

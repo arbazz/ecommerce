@@ -1,5 +1,5 @@
 import React from 'react';
-import { Alert, View, AsyncStorage, TouchableOpacity, Image, KeyboardAvoidingView } from 'react-native'
+import { Alert, View,  TouchableOpacity, Image, KeyboardAvoidingView } from 'react-native'
 import Input from '../../components/Input/Input'
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Button } from 'react-native-elements';
@@ -10,6 +10,7 @@ import * as Permissions from 'expo-permissions';
 import  uploadImage  from '../../config/firebase/Database/Image.js'
 import { geteDataForAdminProfileField } from '../../config/firebase/Database/GetData'
 import { saveEditUserData } from '../../config/firebase/Database/SaveData'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default class EditProfile extends React.Component {
     constructor() {

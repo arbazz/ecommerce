@@ -1,11 +1,12 @@
 import React from 'react';
-import { ScrollView, View, Text, TouchableOpacity, SafeAreaView, Image, AsyncStorage } from 'react-native'
+import { ScrollView, View, Text, TouchableOpacity, SafeAreaView, Image } from 'react-native'
 import Styles from './style'
 import { Card, ListItem, Button, Icon } from 'react-native-elements'
 import AccountList from '../../components/AccountList/AccountList'
 import SignOut from '../../config/firebase/Auth/SignOut'
 import { geteDataForAdminProfileField } from '../../config/firebase/Database/GetData'
 import { NavigationEvents } from "react-navigation";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default class Account extends React.Component {
     constructor() {

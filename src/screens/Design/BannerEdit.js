@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollView, View, Text, TouchableOpacity, Image,  AsyncStorage,Alert } from 'react-native'
+import { ScrollView, View, Text, TouchableOpacity, Image,  Alert } from 'react-native'
 import Styles from './style'
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import ImagePicker from '../../components/imagePicker/imagePicker'
@@ -8,6 +8,7 @@ import { saveTopBanner } from '../../config/firebase/Database/SaveData'
 import { getDataForTopBanner } from '../../config/firebase/Database/GetData'
 import deleteImage from '../../config/firebase/Database/DeleteImage'
 import { deleteData } from '../../config/firebase/Database/DeleteData'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default class BannerEdit extends React.Component {
     constructor() {

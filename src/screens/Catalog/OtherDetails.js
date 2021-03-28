@@ -7,8 +7,7 @@ import {
     SafeAreaView,
     Alert,
     KeyboardAvoidingView,
-    Image,
-    AsyncStorage,
+    Image
 } from 'react-native'
 import Styles from './style'
 import * as Permissions from 'expo-permissions';
@@ -16,6 +15,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 import ImagePicker from '../../components/imagePicker/imagePicker'
 import { Input } from 'react-native-elements'
 import { Header } from 'react-navigation-stack';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default class OtherDetails extends React.Component {
     constructor() {

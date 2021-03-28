@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollView, View, TouchableOpacity, AsyncStorage, SafeAreaView, Dimensions, ActivityIndicator } from 'react-native'
+import { ScrollView, View, TouchableOpacity,  SafeAreaView, Dimensions, ActivityIndicator } from 'react-native'
 import Styles from './style';
 import Crousel from '../../components/crousel/crousel'
 import { Text } from 'native-base'
@@ -12,6 +12,7 @@ import { checkBillInfo, getDataAll } from '../../config/firebase/Database/GetDat
 import { Ionicons } from '@expo/vector-icons';
 import {Picker, Form } from "native-base";
 import ModalDropdown from 'react-native-modal-dropdown';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const { width, height } = Dimensions.get('window')
 

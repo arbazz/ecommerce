@@ -8,12 +8,13 @@ import {
     Alert,
     KeyboardAvoidingView,
     Image,
-    AsyncStorage,
+    
 } from 'react-native'
 import Styles from './style'
 import * as Permissions from 'expo-permissions';
 import { MaterialIcons } from '@expo/vector-icons';
 import ImagePicker from '../../components/imagePicker/imagePicker'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default class AddProductDetails extends React.Component {
     constructor() {

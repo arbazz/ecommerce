@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollView, View, Text, TouchableOpacity, Image, AsyncStorage, Alert } from 'react-native'
+import { ScrollView, View, Text, TouchableOpacity, Image,  Alert } from 'react-native'
 import Styles from './style'
 import { Entypo } from '@expo/vector-icons';
 import ImagePicker from '../../components/imagePicker/imagePicker'
@@ -10,6 +10,7 @@ import deleteImage from '../../config/firebase/Database/DeleteImage'
 import { deleteData } from '../../config/firebase/Database/DeleteData'
 import AccountListImage from '../../components/AccountList/AccountListImage'
 import { NavigationEvents } from "react-navigation";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default class Category extends React.Component {
     constructor() {

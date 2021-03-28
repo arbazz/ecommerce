@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { View, KeyboardAvoidingView, TouchableOpacity, Platform,AsyncStorage } from 'react-native';
+import { View, KeyboardAvoidingView, TouchableOpacity, Platform } from 'react-native';
 import { Container, Header, Text, Form, Item, Input, Label } from 'native-base';
 import styles from './style'
 import { saveBillingInfo } from '../../config/firebase/Database/SaveData' 
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default class index extends Component {
   constructor(){

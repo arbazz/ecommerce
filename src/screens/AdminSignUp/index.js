@@ -1,11 +1,12 @@
 import React from 'react';
-import { ScrollView, View, Text, TouchableOpacity, AsyncStorage, Alert,   ActivityIndicator, KeyboardAvoidingView } from 'react-native'
+import { ScrollView, View, Text, TouchableOpacity, Alert,   ActivityIndicator, KeyboardAvoidingView } from 'react-native'
 import Styles from './style'
 import Input from '../../components/Input/Input';
 import { inputIconCOlor } from '../../config/themeColors'
 import { signUp,checkAuth } from '../../config/firebase/Auth/signUpAuth'
 import { Header } from 'react-navigation-stack';
 import {saveUsers} from '../../config/firebase/Database/AuthDatabase'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default class Signup extends React.Component {
     constructor() {

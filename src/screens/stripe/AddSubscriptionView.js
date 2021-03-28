@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, ScrollView, AsyncStorage, Image } from 'react-native';
+import { StyleSheet, View, ScrollView,  Image } from 'react-native';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 import PaymentFormView from './PaymentView';
 import { TextInput, TouchableHighlight } from 'react-native-gesture-handler';
@@ -8,6 +8,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { deleteProduct } from '../../store/action'
 import { bindActionCreators } from 'redux';
 import { Right, Icon, Container, Header, Content, Card, CardItem, Thumbnail, Text, Button, Left, Body } from 'native-base';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 /**
  * The class renders a view with PaymentFormView

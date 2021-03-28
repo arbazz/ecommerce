@@ -8,7 +8,6 @@ import {
     Alert,
     KeyboardAvoidingView,
     Image,
-    AsyncStorage,
     ActivityIndicator,
     BackHandler
 } from 'react-native'
@@ -19,6 +18,7 @@ import Welcome from '../../../assets/images/welcome.jpg'
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { signInAuth } from '../../config/firebase/Auth/signinAuth'
 import { checkAuth } from '../../config/firebase/Auth/signUpAuth'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default class AdminLogin extends React.Component {
     constructor() {

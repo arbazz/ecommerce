@@ -7,7 +7,6 @@ import {
     KeyboardAvoidingView,
     Text,
     Image,
-    AsyncStorage,
     Alert
 } from "react-native";
 import styles from './style'
@@ -20,6 +19,8 @@ import { getProfileData } from '../../config/firebase/Database/AuthDatabase'
 import signout from '../../config/firebase/Auth/SignOut'
 import { ScrollView } from "react-native-gesture-handler";
 import { Spinner, Content } from 'native-base';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 class Login extends React.Component {
     constructor() {
         super();

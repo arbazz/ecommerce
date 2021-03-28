@@ -1,4 +1,5 @@
-import React from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import React, { useEffect, useState } from 'react';
 import {
     View,
     Text,
@@ -7,39 +8,68 @@ import {
 } from 'react-native';
 import { ScrollView, TextInput } from 'react-native-gesture-handler';
 import Feather from 'react-native-vector-icons/Feather';
+import { getDataAll, getDataComments } from '../../config/firebase/Database/GetData';
+import { addComment } from '../../config/firebase/Database/SaveData';
 
 
-export default function Comments() {
+export default function Comments(navigation) {
+
+    const [comments, setComments] = useState([]);
+    const [comment, setComment] = useState("");
+    const [loading, setLoading] = useState(false);
+
+    useEffect(() => {
+        getComment();
+    }, []);
+
+
+    const getComment = async () => {
+        const docId = navigation.navigation.state?.params?.docId;
+        const res = await getDataComments(docId);
+        console.log(res);
+        setComments(res);
+    }
+
+    const handleAddCommnet = async () => {
+        const docId = navigation.navigation.state?.params?.docId;
+        if (comment && docId) {
+            const uid = await AsyncStorage.getItem("uid");
+            const res = await addComment(uid, docId, comment);
+            console.log(res);
+            if (res === 'sucess') {
+                setComment('');
+                getComment()
+            }
+        } else {
+            console.log('check failed')
+        }
+    }
+
 
     return (
         <>
             <ScrollView contentContainerStyle={{ backgroundColor: 'white', flex: 1 }}>
                 <View style={styles.header}>
-                    <Text style={styles.headerTitke}>Comments (3)</Text>
+                    <Text style={styles.headerTitke}>Comments ({comments.length})</Text>
                 </View>
+                {
+                    !!comments.length && comments.map((e, i) => {
+                        return (
+                            <View style={styles.commentContainer} key={i}>
+                                <View style={styles.innder}>
+                                    <Image
+                                        style={styles.image}
+                                    />
+                                    <View style={styles.text}>
+                                        <Text style={styles.name}>User</Text>
+                                        <Text style={styles.dexs}>{e.docData.text}</Text>
+                                    </View>
+                                </View>
+                            </View>
+                        )
+                    })
 
-                <View style={styles.commentContainer}>
-                    <View style={styles.innder}>
-                        <Image
-                            style={styles.image}
-                        />
-                        <View style={styles.text}>
-                            <Text style={styles.name}>Brigita</Text>
-                            <Text style={styles.dexs}>Ut adipisicing laboris fugiat commodo voluptate ullamco.</Text>
-                        </View>
-                    </View>
-                </View>
-                <View style={styles.commentContainer}>
-                    <View style={styles.innder}>
-                        <Image
-                            style={styles.image}
-                        />
-                        <View style={styles.text}>
-                            <Text style={styles.name}>Brigita</Text>
-                            <Text style={styles.dexs}>Ut adipisicing laboris fugiat commodo voluptate ullamco.</Text>
-                        </View>
-                    </View>
-                </View>
+                }
             </ScrollView>
             <View style={styles.sendContianer}>
                 <View style={styles.row}>
@@ -47,8 +77,10 @@ export default function Comments() {
                     <TextInput
                         style={styles.textin}
                         placeholder="Write your comment here..."
+                        onChangeText={e => setComment(e)}
+                        value={comment}
                     />
-                    <Feather name="send" style={styles.send}/>
+                    <Feather name="send" style={styles.send} onPress={handleAddCommnet} />
                 </View>
             </View>
         </>
@@ -90,6 +122,7 @@ const styles = StyleSheet.create({
     },
     text: {
         marginLeft: 10,
+        width: '100%'
     },
     name: {
         fontSize: 17,
@@ -97,7 +130,7 @@ const styles = StyleSheet.create({
     },
     dexs: {
         width: '80%',
-        marginTop: 5
+        marginTop: 5,
     },
     sendContianer: {
         paddingBottom: 30,

@@ -176,6 +176,36 @@ const savePushToken = async (token) => {
     }else{
         console.log("not sending data")
     }
+};
+
+
+
+const addLike = async (uid, docId) => {
+    return new Promise(async (resolve, reject) => {
+        await db.collection("posts").doc(docId).update({
+           users: firebase.firestore.FieldValue.arrayUnion( uid ),
+           likes: firebase.firestore.FieldValue.increment(1)
+        }).then(() => {
+            resolve("sucess");
+        }).catch((err) => {
+            console.log(err)
+        })
+    })
+}
+
+const addComment = async (uid, docId, text) => {
+    return new Promise(async (resolve, reject) => {
+        await db.collection("comments").add({
+            uid,
+            docId,
+            text
+        }).then(() => {
+            console.log('added')
+            resolve("sucess");
+        }).catch((err) => {
+            console.log(err)
+        })
+    })
 }
 
 
@@ -188,5 +218,8 @@ export {
     saveOrderInfo,
     changeStatus,
     saveEditUserData,
-    savePushToken
+    savePushToken,
+    addLike,
+    addComment
+
 }

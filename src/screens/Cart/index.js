@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, TouchableOpacity, Image, AsyncStorage, ActivityIndicator } from 'react-native'
+import { View, TouchableOpacity, Image,  ActivityIndicator } from 'react-native'
 import { Container, Header, Content, Card, CardItem, Text, Icon, Right } from 'native-base';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -8,6 +8,7 @@ import { checkAuth } from '../../config/firebase/Auth/signUpAuth'
 import { Toast } from 'native-base'
 import { addProduct } from '../../store/action';
 import { checkBillInfo, getDataAll } from '../../config/firebase/Database/GetData'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 class Cart extends React.Component {
     constructor(props) {
