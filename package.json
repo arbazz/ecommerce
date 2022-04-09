@@ -18,7 +18,7 @@
     "expo-stripe-checkout": "^1.0.1",
     "firebase": "^7.6.1",
     "mime-types": "^2.1.25",
-    "moment": "^2.24.0",
+    "moment": "^2.29.2",
     "native": "^0.3.3",
     "native-base": "^2.13.8",
     "react": "~16.9.0",
